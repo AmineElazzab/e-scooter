@@ -1,7 +1,8 @@
-import { View, Text, TouchableOpacity, TextInput, StyleSheet, Image, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, StyleSheet, Image, ScrollView } from 'react-native';
 import React, { useState } from 'react'
 import { firebase } from '../config'
 import { useNavigation } from '@react-navigation/native'
+import m from "../assets/mobility-pana.png"
 
 const Register = () => {
     const [email, setEmail] = useState('')
@@ -9,7 +10,7 @@ const Register = () => {
     const [fullName, setfullName] = useState('')
     const navigation = useNavigation();
 
-  const registerUser = async (email, password, firstName, lastName, phoneNumber) => {
+  const registerUser = async (email, password, fullName) => {
         await firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(() => {
                 firebase.auth().currentUser.sendEmailVerification({
@@ -42,7 +43,7 @@ const Register = () => {
         >
         <View style={styles.container}>
             <Image
-                source={require('../assets/5859972.jpg')}
+                source={m}
                 style={{
                     width: 350,
                     height: 350,
@@ -81,7 +82,7 @@ const Register = () => {
                 autoCorrect={false}
             />
             <TouchableOpacity
-                onPress={() => registerUser(email, password, firstName, lastName, phoneNumber)}
+                onPress={() => registerUser(email, password, fullName)}
                 style={styles.button}
             >
                 <Text style={styles.buttonTitle}>Register</Text>
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
         padding: 15,
     },
     button: {
-        backgroundColor: '#FFB800',
+        backgroundColor: '#112B54',
         width: 300,
         height: 50,
         borderRadius: 10,
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
     },
     footerLink: {
 
-        color: "#FFB800",
+        color: "#112B54",
         fontWeight: "bold",
         fontSize: 16,
         shadowColor: '#000',
