@@ -2,7 +2,8 @@ import { View, Text, TouchableOpacity, TextInput, StyleSheet,Image } from 'react
 import React, { useState } from 'react'
 import { firebase } from '../config'
 import { useNavigation } from '@react-navigation/native'
-// import Image from "../assets/5070795.jpg"
+import m from "../assets/m.jpg"
+
 
 
 const Login = () => {
@@ -33,7 +34,7 @@ const Login = () => {
 
     return (
         <View style={styles.container}>
-                <Image source={require('../assets/5070795.jpg')} style={{ 
+                <Image source={m} style={{ 
                 width: 350,
                 height: 350,
                 }} />
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
         padding: 15,
     },
     button: {
-        backgroundColor: '#FFB800',
+        backgroundColor: '#112B54',
         width: 300,
         height: 50,
         borderRadius: 10,
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
         color: 'black'
     },
     footerLink: {
-        color: "#FFB800",
+        color: "#112B54",
         fontWeight: "bold",
         fontSize: 16,
         shadowColor: '#000',
