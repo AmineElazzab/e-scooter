@@ -6,8 +6,21 @@ import Login from "./src/Login";
 import Register from "./src/Register";
 import Dashboard from "./src/Dashboard";
 import Header from "./components/Header";
+import Profile from "./components/Profile";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
+
+
+const home = "Home";
+const profile = "Profile";
+const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
+
+
+
+
+
 
 function App() {
   const [initializing, setInitializing] = useState(true);
@@ -32,27 +45,27 @@ function App() {
         <Stack.Navigator>
           <Stack.Screen name="Login" component={Login}
             options={{
-              headerTitle: () => <Header name="Login"/>,
+              headerTitle: () => <Header name="Login" />,
               headerStyle: {
-                backgroundColor: '#FFB800',
+                backgroundColor: '#112B54',
                 height: 100,
                 // borderBottomLeftRadius: 50,
                 borderBottomRightRadius: 50,
-                shadowColor:'#000',
+                shadowColor: '#000',
                 elevation: 25,
               },
             }}
 
           />
-          <Stack.Screen name="Register" component={Register} 
+          <Stack.Screen name="Register" component={Register}
             options={{
               headerTitle: () => <Header name="Register" />,
               headerStyle: {
-                backgroundColor: '#FFB800',
+                backgroundColor: '#112B54',
                 height: 100,
                 // borderBottomLeftRadius: 50,
                 borderBottomRightRadius: 50,
-                shadowColor:'#000',
+                shadowColor: '#000',
                 elevation: 25,
               },
             }}
@@ -64,21 +77,46 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Dashboard" component={Dashboard} 
+      {/* <Stack.Navigator> */}
+      {/* <Stack.Screen name="Dashboard" component={Dashboard}
           options={{
             headerTitle: () => <Header name="Dashboard" />,
             headerStyle: {
-              backgroundColor: '#FFB800',
+              backgroundColor: '#112B54',
               height: 100,
               // borderBottomLeftRadius: 50,
               borderBottomRightRadius: 50,
-              shadowColor:'#000',
+              shadowColor: '#000',
               elevation: 25,
             },
           }}
-        />
-      </Stack.Navigator>
+        /> */}
+      <Tab.Navigator
+        initialRouteName="home"
+        activeColor="#fff"
+        barStyle={{ backgroundColor: '#112B54' }}
+        screenOptions=
+        {({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+            if (route.name === home) {
+              iconName = focused ? 'home' : 'home-outline';
+            } else if (route.name === profile) {
+              iconName = focused ? 'settings' : 'settings-outline';
+            }
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: 'tomato',
+          inactiveTintColor: 'white',
+          labelStyle: { paddingBottom: 10, fontSize: 10 },
+          style: { padding: 10, height: 70}
+        }}>
+        <Tab.Screen name="Home" component={Dashboard}/>
+        <Tab.Screen name="Profile" component={Profile}/>
+      </Tab.Navigator>
+      {/* </Stack.Navigator> */}
     </NavigationContainer>
   );
 }
