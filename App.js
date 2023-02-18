@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Profile from "./components/Profile";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Onboarding from "./components/Onboarding"
 
 
 
@@ -16,7 +17,6 @@ const home = "Home";
 const profile = "Profile";
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
-
 
 
 
@@ -43,12 +43,19 @@ function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen
+            name="Onboarding"
+            component={Onboarding}
+            options={{
+              headerShown: false,
+            }}
+          />
           <Stack.Screen name="Login" component={Login}
             options={{
               headerTitle: () => <Header name="Login" />,
               headerStyle: {
                 backgroundColor: '#112B54',
-                height: 100,
+                height: 80,
                 // borderBottomLeftRadius: 50,
                 borderBottomRightRadius: 50,
                 shadowColor: '#000',
@@ -62,7 +69,7 @@ function App() {
               headerTitle: () => <Header name="Register" />,
               headerStyle: {
                 backgroundColor: '#112B54',
-                height: 100,
+                height: 80,
                 // borderBottomLeftRadius: 50,
                 borderBottomRightRadius: 50,
                 shadowColor: '#000',
@@ -111,10 +118,10 @@ function App() {
           activeTintColor: 'tomato',
           inactiveTintColor: 'white',
           labelStyle: { paddingBottom: 10, fontSize: 10 },
-          style: { padding: 10, height: 70}
+          style: { padding: 10, height: 70 }
         }}>
-        <Tab.Screen name="Home" component={Dashboard}/>
-        <Tab.Screen name="Profile" component={Profile}/>
+        <Tab.Screen name="Home" component={Dashboard} />
+        <Tab.Screen name="Profile" component={Profile} />
       </Tab.Navigator>
       {/* </Stack.Navigator> */}
     </NavigationContainer>
