@@ -1,9 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import Constants from "expo-constants";
+
+
+
 
 const Header = (props) => {
   return (
     <View style={{ marginLeft: 15,
+
     }}>
       <Text style={{
         color: 'white',
