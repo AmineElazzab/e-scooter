@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, Polyline } from 'react-native-maps';
 import { StyleSheet, View, Button } from 'react-native';
 import * as Location from 'expo-location';
+import a from "../assets/marker.png"
 
 
 export default function App() {
@@ -41,6 +42,12 @@ export default function App() {
                 region={region}
                 onRegionChangeComplete={region => setRegion(region)}
             >
+
+                <Marker
+                   draggable
+                    coordinate={region}
+                    onDragEnd={(direction) => setRegion(direction.nativeEvent.coordinate)}
+                />
                 <Marker
                     coordinate={{
                         latitude: 32.29939,
@@ -48,6 +55,7 @@ export default function App() {
                     }}
                     title="Scooter"
                     description="Scooter"
+                    image={a}
                 />
                 <Marker
                     coordinate={{
@@ -56,6 +64,7 @@ export default function App() {
                     }}
                     title="Scooter"
                     description="Scooter"
+                    image={a}
                 />
                 <Marker
                     coordinate={{
@@ -64,6 +73,7 @@ export default function App() {
                     }}
                     title="Scooter"
                     description="Scooter"
+                    image={a}
                 />
                 <Marker
                     coordinate={{
@@ -72,14 +82,16 @@ export default function App() {
                     }}
                     title="Scooter"
                     description="Scooter"
+                    image={a}
                 />
                 <Marker
-                    coordinate={{   
+                    coordinate={{
                         latitude: 32.290849,
                         longitude: -9.229166,
                     }}
                     title="Scooter"
                     description="Scooter"
+                    image={a}
                 />
                 <Marker
                     coordinate={{
@@ -88,6 +100,50 @@ export default function App() {
                     }}
                     title="Scooter"
                     description="Scooter"
+                    image={a}
+                />
+                <Polyline
+                    coordinates={[region,
+                        {
+                            latitude: 32.29939,
+                            longitude: -9.23718,
+                        },
+                        {
+                            latitude: 32.291482,
+                            longitude: -9.239221,
+                        },
+                        {
+                            latitude: 32.296517,
+                            longitude: -9.231849,
+                        },
+                        {
+                            latitude: 32.292371,
+                            longitude: -9.219993,
+                        },
+                        {
+                            latitude: 32.290849,
+                            longitude: -9.229166,
+                        },
+                        {
+                            latitude: 32.300203,
+                            longitude: -9.228323,
+                        },
+                        {
+                            latitude: 32.29939,
+                            longitude: -9.23718,
+                        },
+                     ]}
+                    
+                    strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
+                    strokeColors={[
+                        '#7F0000',
+                        '#00000000', // no color, creates a "long" gradient between the previous and next coordinate
+                        '#B24112',
+                        '#E5845C',
+                        '#238C23',
+                        '#7F0000'
+                    ]}
+                    strokeWidth={6}
                 />
             </MapView>
             <Button title="Get Location" onPress={userLocation} />
@@ -104,3 +160,4 @@ const styles = StyleSheet.create({
         height: '100%',
     },
 });
+
