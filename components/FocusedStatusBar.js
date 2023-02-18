@@ -7,3 +7,4 @@ const FocusedStatusBar = (props) => {
 
 }
 export default FocusedStatusBar
+
