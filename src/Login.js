@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput, StyleSheet,Image } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, StyleSheet,Image, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { firebase } from '../config'
 import { useNavigation } from '@react-navigation/native'
@@ -12,6 +12,12 @@ const Login = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const simpleAlertHandler = () => {
+        //function to make simple alert
+        alert('You have successfully logged in!');
+    }
+
+    
 
 
     loginUser = async (email, password) => {
