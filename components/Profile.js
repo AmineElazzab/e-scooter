@@ -32,7 +32,7 @@ const Dashboard = () => {
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>hi 
-            {name ? name : ' Hero '
+            {name.fullName ? name : ' Hero '
             }!
             </Text>
             <TouchableOpacity
