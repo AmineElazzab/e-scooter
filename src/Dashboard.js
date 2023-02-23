@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import MapView, { Marker, Polyline } from 'react-native-maps';
+import MapView, {
+    Marker, Polyline,
+    PROVIDER_GOOGLE, Circle,
+} from 'react-native-maps';
 import { StyleSheet, View, Button } from 'react-native';
 import * as Location from 'expo-location';
 import a from "../assets/marker.png"
+import view from "../assets/view.png"
+import MapViewDirections from "react-native-maps-directions"
+import { GOOGLE_MAPS_KEY } from "@env"
 
 
 export default function App() {
@@ -36,17 +42,22 @@ export default function App() {
         userLocation();
     }, []);
 
+
     return (
         <View style={styles.container}>
             <MapView style={styles.map}
                 region={region}
                 onRegionChangeComplete={region => setRegion(region)}
-            >
+                provider={PROVIDER_GOOGLE}
 
+            >
                 <Marker
-                   draggable
+                    draggable
                     coordinate={region}
                     onDragEnd={(direction) => setRegion(direction.nativeEvent.coordinate)}
+                    title="You"
+                    description="You"
+                    image={view}
                 />
                 <Marker
                     coordinate={{
@@ -102,38 +113,34 @@ export default function App() {
                     description="Scooter"
                     image={a}
                 />
+                <Circle
+                    center={region}
+                    radius={100}
+                    fillColor="rgba(255,0,0,0.5)"
+                    strokeColor="rgba(255,0,0,0.5)"
+                />
+                <MapViewDirections
+                    origin={region}
+                    destination={{
+                        latitude: 32.29939,
+                        longitude: -9.23718,
+                    }}
+                    apikey={GOOGLE_MAPS_KEY}
+                />
+
+                {/* <AnimatedRegion
+                    coordinate={region}
+                    duration={1000}
+                    
+                /> */}
                 <Polyline
                     coordinates={[region,
                         {
                             latitude: 32.29939,
                             longitude: -9.23718,
                         },
-                        {
-                            latitude: 32.291482,
-                            longitude: -9.239221,
-                        },
-                        {
-                            latitude: 32.296517,
-                            longitude: -9.231849,
-                        },
-                        {
-                            latitude: 32.292371,
-                            longitude: -9.219993,
-                        },
-                        {
-                            latitude: 32.290849,
-                            longitude: -9.229166,
-                        },
-                        {
-                            latitude: 32.300203,
-                            longitude: -9.228323,
-                        },
-                        {
-                            latitude: 32.29939,
-                            longitude: -9.23718,
-                        },
-                     ]}
-                    
+                    ]}
+
                     strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
                     strokeColors={[
                         '#7F0000',
@@ -143,7 +150,7 @@ export default function App() {
                         '#238C23',
                         '#7F0000'
                     ]}
-                    strokeWidth={6}
+                    strokeWidth={2}
                 />
             </MapView>
             <Button title="Get Location" onPress={userLocation} />
